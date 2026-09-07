@@ -371,9 +371,65 @@
         </div>
       </a>
 
+      <!-- Card 10: 音画随心 (voice) -->
+      <a href="https://voice.xzbest.site/" target="_blank" class="card" id="card-voice" data-tags="productivity" data-keywords="音画随心 极速音视频处理 音视频工坊 音轨替换 提取音频 mp3 混音 视频时间 修改时间 放大音量 音量增强 视频处理 voice audio video">
+        <div class="card-header">
+          <div class="icon-container">
+            <img src="assets/voice.png" alt="音画随心 Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <svg class="svg-fallback" style="display:none;" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" rx="16" fill="url(#voice-grad)" />
+              <path d="M16 34 C16 34 20 20 25 32 C29 42 33 22 37 36 C40 45 44 26 48 34" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+              <path d="M28 22 L44 32 L28 42 Z" fill="white" />
+              <circle cx="45" cy="22" r="3" fill="#a7f3d0" />
+              <defs>
+                <linearGradient id="voice-grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#8b5cf6"/>
+                  <stop offset="1" stop-color="#3b82f6"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <h2>音画随心</h2>
+          <p>极速音视频多功能处理工坊。支持无重编码音轨替换、MP3提取混音、视频创建时间改写与无损音量放大。</p>
+        </div>
+        <div class="card-footer">
+          <div class="tag-list">
+            <span class="tag">音轨替换</span>
+            <span class="tag">音量增强</span>
+          </div>
+          <span class="action-link">
+            立即访问
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </span>
+        </div>
+      </a>
 
     </main>
 
+    <!-- Empty State -->
+    <div class="empty-state" id="empty-state" style="display: none;">
+      <div class="empty-icon">🔍</div>
+      <h3>未找到匹配的应用</h3>
+      <p>可以尝试更换搜索关键词或切换到“全部”标签</p>
+      <button class="empty-reset-btn" id="empty-reset-btn">清空筛选条件</button>
+    </div>
+
+    <!-- Footer Stats -->
+    <footer class="footer-stats">
+      <div class="stat-item">
+        <span class="dot"></span>
+        <span>全域矩阵应用正常服务中</span>
+      </div>
+      <div class="footer-brand">
+        <span>小智 AI 聚合门户</span>
+        <a href="https://vercel.com" target="_blank" class="vercel-badge">
+          <svg width="12" height="12" viewBox="0 0 116 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.5 0L115 100H0L57.5 0Z"/></svg>
+          Powered by Vercel
+        </a>
+      </div>
+    </footer>
 
   </div>
 
@@ -382,6 +438,8 @@
       const searchInput = document.getElementById('search-input');
       const filterTabs = document.getElementById('filter-tabs');
       const cards = document.querySelectorAll('.card');
+      const emptyState = document.getElementById('empty-state');
+      const emptyResetBtn = document.getElementById('empty-reset-btn');
 
       let currentFilter = 'all';
       let searchQuery = '';
@@ -396,15 +454,27 @@
       filterTabs.addEventListener('click', (e) => {
         const target = e.target;
         if (target.classList.contains('filter-btn')) {
-          // Remove active class from all buttons
           document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-          // Add active class to clicked button
           target.classList.add('active');
-          // Update filter query
           currentFilter = target.getAttribute('data-filter');
           filterCards();
         }
       });
+
+      // Reset empty state
+      if (emptyResetBtn) {
+        emptyResetBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          searchQuery = '';
+          const allBtn = document.getElementById('btn-filter-all');
+          if (allBtn) {
+            allBtn.click();
+          } else {
+            currentFilter = 'all';
+            filterCards();
+          }
+        });
+      }
 
       // Filter function
       function filterCards() {
@@ -425,6 +495,9 @@
           }
         });
 
+        if (emptyState) {
+          emptyState.style.display = visibleCount === 0 ? 'flex' : 'none';
+        }
       }
     });
   </script>

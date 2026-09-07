@@ -1,62 +1,62 @@
 # 小智 AI 应用导航门户 (Smart Navigation Portal)
 
-这是一个为部署在 Vercel 上的系列 AI 应用制作的**简约高颜值入口聚合页**。整体设计风格轻量优雅、色彩明快（非暗黑风），并包含实时搜索、分类检索以及高健壮性的 ICON 加载方案。
+这是一个为部署在 Vercel 及云端的系列产品打造的**高颜值轻量入口聚合页**。整体采用现代日间浅色毛玻璃风格，色彩明快通透，包含全域实时搜索、多分类即时过滤以及高健壮性的双轨图标加载方案。
 
 ---
 
 ## 📂 项目结构
 
-页面位于 `daohan` 目录下，结构清晰规范：
-
 ```text
 daohan/
-├── assets/
-│   ├── xzmap.jpg       # 中国旅游地图 LOGO
-│   ├── xzrl.png        # 3D 小智日历 ICON (Flash 生成)
-│   └── zhoumoyou.jpg   # 周末轻松游 LOGO
-├── index.html          # 主入口文件 (包含精美 SVG 备用图标及搜索过滤逻辑)
-└── style.css           # 界面样式表 (包含柔和毛玻璃、流体动效及响应式布局)
+├── assets/                  # 静态应用图标 (png / jpg)
+│   ├── shitou.png           # 手头剪子布
+│   ├── voice.png            # 音画随心
+│   ├── xxtf.png             # 汐汐公主城堡防御
+│   ├── xzchuxin.png         # 小智出行
+│   ├── xzmap.jpg            # 中国旅游地图
+│   ├── xzrl.png             # 小智日历
+│   └── zhoumoyou.jpg        # 周末轻松游
+├── index.html               # 门户主入口 (含卡片网格、双轨图标与即时过滤)
+├── style.css                # 现代浅色毛玻璃界面样式表
+├── run.bat                  # 本地启动脚本 (自动映射真实IP与局域网热更新)
+└── README.md                # 项目概要与部署说明
 ```
 
 ---
 
-## 🎨 核心设计与体验
+## 🎨 核心特性
 
-1. **高端简约浅色调**：
-   - 采用大气的线性渐变与三个在后台缓慢移动和缩放的模糊渐变球（Blob），营造现代感与空间深度。
-   - 主体采用毛玻璃卡片（Glassmorphism），结合极细边框（`rgba(241, 245, 249, 0.8)`）与轻柔投影，视觉质感极佳。
-2. **像素级一致的 ICON 加载机制**：
-   - 对于已通过 AI 生成的 3 个 PNG 图标（`xzmap`、`xzrl`、`zhoumoyou`）直接读取使用。
-   - 对于其他 3 个项目（由于生成限制暂无 PNG 图标），在 HTML 中通过 `onerror` 机制**无缝自动回退**到设计精美、颜色饱满的矢量 SVG 图标。
-   - 如果未来在 `assets/` 放入对应的 PNG 图标（如 `xzgp.png`），页面会自动切换为 PNG 图标，无需修改任何代码。
-3. **流畅的微动效**：
-   - 卡片在悬停时会平滑上浮 `6px`，阴影向外扩散并带有微弱的主题色晕染。
-   - 按钮和链接悬停时包含横向位移或轻微缩放。
-4. **实时过滤与检索**：
-   - **关键词搜索**：通过输入框实时匹配项目名称、分类标签及隐藏的关键字（包含拼音及英文缩写）。
-   - **分类导航**：提供全部、旅游生活、效率工具、金融理财、AI 工具及资源检索六个标签页进行快速筛选。
+1. **日间高级浅色风**：柔和毛玻璃质感（`backdrop-filter: blur(12px)`）搭配纯 CSS 动态渐变浮球光晕，视觉通透、富有呼吸感。
+2. **双轨容错图标机制**：优先读取 `assets/` 高清实体图，加载异常自动触发 `onerror` 降级为专属配色矢量 SVG，确保界面永不裂图。
+3. **实时检索与分类过滤**：支持应用名称、拼音与多维度标签即时模糊搜索，并配备空状态重置交互。
+4. **极致轻量零依赖**：原生 HTML5 + Vanilla CSS + ES6+，无框架与打包环节，秒级加载。
 
 ---
 
-## 🔗 聚合应用列表
+## 🔗 聚合应用矩阵 (10 Apps)
 
-| 应用名称 | 部署地址 | 分类标签 | 图标类型 |
+| 应用名称 | 线上地址 | 分类标签 | 功能简介 |
 | :--- | :--- | :--- | :--- |
-| **中国旅游地图** | [xzmap.xzbest.site](https://xzmap.xzbest.site/) | 旅游生活 / 地图导览 | JPG (备用 SVG) |
-| **周末轻松游** | [zmy.xzbest.site](https://zmy.xzbest.site) | 旅游生活 / AI 推荐 | JPG (备用 SVG) |
-| **小智日历** | [xzrl.xzbest.site](https://xzrl.xzbest.site/) | 效率工具 / 智能日程 | PNG (备用 SVG) |
-| **小智股票精选** | [xzgp.xzbest.site](https://xzgp.xzbest.site/) | 金融理财 / 风险预警 | 默认 SVG (支持 PNG 覆盖) |
-| **星骏跨境多模态AI** | [xjzn.xzbest.site](https://xjzn.xjcerp.com/ -> xjzn.xzbest.site) | AI 工具 / 跨境出海 | 默认 SVG (支持 PNG 覆盖) |
-| **小智云盘聚合搜索** | [wanpan.xzbest.site](https://wanpan.xzbest.site/) | 资源检索 / 极速去重 | 默认 SVG (支持 PNG 覆盖) |
+| **中国旅游地图** | [xzmap.xzbest.site](https://xzmap.xzbest.site/) | 旅游生活 | 省份地标深度探索与旅行足迹管理 |
+| **周末轻松游** | [zmy.xzbest.site](https://zmy.xzbest.site) | 旅游生活 | 周边吃住行游娱 AI 智能短途定制 |
+| **小智日历** | [xzrl.xzbest.site](https://xzrl.xzbest.site/) | 效率工具 | 极简日程规划与待办时间助手 |
+| **小智股票精选** | [xzgp.xzbest.site](https://xzgp.xzbest.site/) | 金融理财 | A股基本面诊断与退市/ST风险预警 |
+| **星骏跨境多模态AI** | [xjzn.xzbest.site](https://xjzn.xzbest.site/) | AI 工具 | 跨境出海图影生成与退款原因分析 |
+| **小智云盘聚合搜索** | [wanpan.xzbest.site](https://wanpan.xzbest.site/) | 资源检索 | 跨网盘公开资源一站式极速去重搜索 |
+| **手头剪子布大作战** | [shitou.xzbest.site](https://shitou.xzbest.site/) | 游戏娱乐 | 移动端极简经典休闲对战游戏 |
+| **汐汐公主城堡防御** | [xxtf.xzbest.site](https://xxtf.xzbest.site/) | 游戏娱乐 | 魔法少女策略城堡防守塔防 |
+| **小智出行** | [xzchuxin.xzbest.site](https://xzchuxin.xzbest.site/) | 旅游生活 | 12306火车票与直飞航班双轨比价 |
+| **音画随心** | [voice.xzbest.site](https://voice.xzbest.site/) | 效率工具 | 极速音轨替换、MP3混音、时间改写与无损音量放大 |
 
 ---
 
-## 🚀 部署至 Vercel
+## 🚀 本地运行与部署
 
-若要将该聚合页发布到 Vercel：
-1. 本地直接在 Vercel CLI 执行：
-   ```bash
-   cd d:/anti/daohan
-   vercel
-   ```
-2. 或将代码推送至 GitHub，在 Vercel 后台新建项目，选择 `daohan` 文件夹作为根目录（Root Directory）进行导入，构建命令保留为空，发布即可。
+### 1. 本地启动
+双击 `run.bat` 即可启动本地 HTTP 服务。脚本会自动检测并排除虚拟网卡，打印 Local 与 LAN 局域网访问地址；前端修改刷新即生效（无需重启）。
+
+### 2. Vercel 部署
+推送至 GitHub 后，在 Vercel 导入该仓库：
+- **Root Directory**：设置为 `daohan`
+- **Build Command**：留空
+- 点击 **Deploy** 即可极速发布。
